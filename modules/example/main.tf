@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "module_example" {
   bucket = var.bucket_name
-  acl    = "private"
 
   tags = merge(
     var.tags,
@@ -9,4 +8,9 @@ resource "aws_s3_bucket" "module_example" {
       Environment = var.environment
     }
   )
+}
+
+resource "aws_s3_bucket_acl" "module_example" {
+  bucket = aws_s3_bucket.module_example.id
+  acl    = "private"
 }
